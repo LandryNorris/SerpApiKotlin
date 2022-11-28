@@ -9,3 +9,4 @@ captures
 local.properties
 xcuserdata
 apikey.txt
+shared/src/commonTest/kotlin/Secrets.kt
