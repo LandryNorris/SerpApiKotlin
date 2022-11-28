@@ -34,7 +34,7 @@ abstract class SerpApiSearch(val params: Map<String, String>,
 
     suspend fun getJson() = query<JsonObject>("/search", "json")
 
-    suspend fun getAccount() = query<JsonObject>("/account", includeParams = false)
+    suspend fun getAccountJson() = query<JsonObject>("/account", includeParams = false)
 
     private fun ensureSlash(part1: String, part2: String): String =
         part1 + '/' + part2.trimStart('/')
