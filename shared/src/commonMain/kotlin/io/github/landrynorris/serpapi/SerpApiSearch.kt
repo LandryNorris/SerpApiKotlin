@@ -22,6 +22,11 @@ abstract class SerpApiSearch(val params: Map<String, String>,
                 parameters.append("source", "kotlin")
                 parameters.append("engine", engine)
                 if(format.isNotEmpty()) parameters.append("output", format)
+
+                if(parameters["api_key"] == null) {
+                    if(apiKey.isEmpty()) error("API key is not provided")
+                    parameters.append("api_key", apiKey)
+                }
             }
 
             timeout {
@@ -35,6 +40,8 @@ abstract class SerpApiSearch(val params: Map<String, String>,
     suspend fun getJson() = query<JsonObject>("/search", "json")
 
     suspend fun getAccountJson() = query<JsonObject>("/account", includeParams = false)
+
+    suspend fun getAccount() = query<Account>("/account", includeParams = false)
 
     private fun ensureSlash(part1: String, part2: String): String =
         part1 + '/' + part2.trimStart('/')
