@@ -61,6 +61,6 @@ data class SiteLink(val title: String, val link: String, val snippet: String = "
 data class SearchInformation(
     @SerialName("organic_results_state") val organicResultsState: String,
     @SerialName("query_displayed") val queryDisplayed: String? = null,
-    @SerialName("total_results") val totalResults: Int = 0,
+    @SerialName("total_results") val totalResults: Long = 0,
     @SerialName("time_taken_displayed") val timeTaken: Double = 0.0
 )
