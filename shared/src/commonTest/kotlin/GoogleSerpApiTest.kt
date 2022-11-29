@@ -28,11 +28,13 @@ class GoogleSerpApiTest {
 
     @Test
     fun testNoResults() {
-        val params = mapOf("q" to "absgdgjekenfbgt", "location" to "Austin, Texas")
+        val params = mapOf("q" to "absgdgjekenfbgt28173foeh", "location" to "Austin, Texas")
         //API_KEY is defined in Secrets.kt in the same directory
         val engine = GoogleEngine(params, apiKey = API_KEY)
         val result = runBlocking { engine.getSearchResults() }
 
+        assertTrue(result.organicResults.isEmpty())
+        assertEquals("Fully empty", result.searchInformation.organicResultsState)
     }
 
     @Test

@@ -5,7 +5,8 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class SearchResult(
-    @SerialName("organic_results") val organicResults: List<OrganicResult>
+    @SerialName("organic_results") val organicResults: List<OrganicResult> = listOf(),
+    @SerialName("search_information") val searchInformation: SearchInformation
 )
 
 @Serializable
@@ -55,3 +56,11 @@ data class SiteLinks(val inline: List<SiteLink> = listOf(), val expanded: List<S
 
 @Serializable
 data class SiteLink(val title: String, val link: String, val snippet: String = "")
+
+@Serializable
+data class SearchInformation(
+    @SerialName("organic_results_state") val organicResultsState: String,
+    @SerialName("query_displayed") val queryDisplayed: String? = null,
+    @SerialName("total_results") val totalResults: Int = 0,
+    @SerialName("time_taken_displayed") val timeTaken: Double = 0.0
+)
