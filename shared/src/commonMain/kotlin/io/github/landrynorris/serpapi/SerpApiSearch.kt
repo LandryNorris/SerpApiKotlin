@@ -39,6 +39,8 @@ abstract class SerpApiSearch(val params: Map<String, String>,
 
     suspend fun getJson() = query<JsonObject>("/search", "json")
 
+    suspend fun getSearchResults() = query<SearchResult>("/search", "json")
+
     suspend fun getAccountJson() = query<JsonObject>("/account", includeParams = false)
 
     suspend fun getAccount() = query<Account>("/account", includeParams = false)

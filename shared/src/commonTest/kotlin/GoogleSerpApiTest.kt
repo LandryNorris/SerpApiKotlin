@@ -7,13 +7,32 @@ import kotlin.test.assertTrue
 class GoogleSerpApiTest {
 
     @Test
-    fun testSearch() {
+    fun testSearchJson() {
         val params = mapOf("q" to "Coffee", "location" to "Austin, Texas")
         //API_KEY is defined in Secrets.kt in the same directory
         val engine = GoogleEngine(params, apiKey = API_KEY)
         val result = runBlocking { engine.getJson() }
 
-        assertTrue(result.containsKey("organic_results"))
+        assertTrue(result.isNotEmpty())
+    }
+
+    @Test
+    fun testSearch() {
+        val params = mapOf("q" to "Coffee", "location" to "Austin, Texas")
+        //API_KEY is defined in Secrets.kt in the same directory
+        val engine = GoogleEngine(params, apiKey = API_KEY)
+        val result = runBlocking { engine.getSearchResults() }
+
+        assertTrue(result.organicResults.isNotEmpty())
+    }
+
+    @Test
+    fun testNoResults() {
+        val params = mapOf("q" to "absgdgjekenfbgt", "location" to "Austin, Texas")
+        //API_KEY is defined in Secrets.kt in the same directory
+        val engine = GoogleEngine(params, apiKey = API_KEY)
+        val result = runBlocking { engine.getSearchResults() }
+
     }
 
     @Test
